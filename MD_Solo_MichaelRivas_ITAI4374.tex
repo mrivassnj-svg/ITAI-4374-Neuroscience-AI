@@ -23,6 +23,8 @@
 \usepackage{array}
 \usepackage{float}
 \usepackage{url}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
 \usepackage{microtype}
 \usepackage{setspace}
 \usepackage{enumitem}
@@ -493,17 +495,115 @@ These findings directly illustrate what Module 04 teaches about the difference b
 \section{Next Steps}
 % ============================================================
 
-This pilot audit has covered three modules — brain architecture (Module 02), perception and vision (Module 03), and memory and recall (Module 04) — and produced a clear, differentiated finding in each. For the final project, the audit expands to cover at least two additional modules, with the following plan.
+This pilot audit produced clear findings across three modules. The diagram below maps what was completed in the midterm, what expands in the final, and how each finding drives the next experiment.
 
-\textbf{Module 06 (Emotion and Motivation)} is the highest-priority addition. The confabulation behavior observed in Experiment 3 raises a natural follow-up question: does emotional framing or urgency in the prompt change the confidence or accuracy of Gemini's hallucinations? Rasputia will return with a new set of experiments designed to inject emotionally loaded language around the same contract passages and measure whether tone manipulation changes the failure mode from refusal to confabulation, or vice versa.
+\clearpage
+\thispagestyle{fancy}
+\begin{center}
+\resizebox{\textwidth}{0.90\textheight}{%
+\begin{tikzpicture}[
+  font=\normalsize\sffamily,
+  done/.style={
+    rectangle, rounded corners=6pt,
+    draw=BurningSaffron, line width=1.4pt,
+    fill=AncientUmber!70!VoidBackground,
+    text=FireText, text width=5.0cm, align=center,
+    minimum height=1.6cm, inner sep=8pt
+  },
+  mid/.style={
+    rectangle, rounded corners=6pt,
+    draw=NeonAqua, line width=1.4pt,
+    fill=ObsidianPanel,
+    text=FireText, text width=5.2cm, align=center,
+    minimum height=1.6cm, inner sep=8pt
+  },
+  fin/.style={
+    rectangle, rounded corners=6pt,
+    draw=CrimsonReceipt, line width=1.4pt,
+    fill=AncientUmber!35!VoidBackground,
+    text=FireText, text width=5.0cm, align=center,
+    minimum height=1.6cm, inner sep=8pt
+  },
+  hdr/.style={text=GlowingAsh, font=\large\sffamily\bfseries},
+  arr/.style={-{Stealth[length=7pt]}, color=GlowingAsh, line width=1.2pt},
+  darr/.style={-{Stealth[length=7pt]}, color=CrimsonReceipt,
+               line width=1.2pt, dashed},
+  lbl/.style={text=GlowingAsh, font=\small\sffamily,
+              text width=2.4cm, align=center}
+]
 
-\textbf{Module 07 (Attention and Consciousness)} will form the second expansion. The selective attention experiments will test whether Gemini can filter signal from distraction when flooded with irrelevant information embedded in a long prompt — a direct test of selective attention mechanisms analogous to the brain's ability to maintain focus under noise. The cocktail party effect, inattentional blindness, and cognitive load overload experiments from Lab 07 are all viable candidates for adaptation into the audit framework.
+%% ── HEADERS ─────────────────────────────────────────
+\node[hdr] at (0,    0) {MIDTERM · PILOT};
+\node[hdr] at (7.8,  0) {FINDING};
+\node[hdr] at (15.6, 0) {FINAL EXPANSION};
 
-The final report will add the \textbf{Brain vs. AI Scorecard} comparing Gemini's performance across all five modules against neuroscience predictions. The memory experiment will also be redesigned to test whether longer in-session context further degrades performance, and whether providing explicit retrieval cues (cued recall) improves it relative to free recall — mirroring the established neuroscience of recall enhancement. Based on the hallucination pattern already observed, the hypothesis is that cued recall will improve accuracy, since it supplies the semantic hook that Gemini's architecture needs to surface the correct information.
+%% ── ROW 1: Mod 02 — y = -4.0 ────────────────────────
+\node[done] (m02) at (0,    -4.0)
+  {\textcolor{BurningSaffron}{\textbf{Mod 02 — Brain Architecture}}\\[4pt]
+   Score: \textbf{1.0 / 1.0}};
+\node[mid]  (f02) at (7.8,  -4.0)
+  {Transformer attention\\achieves functional parallel\\(statistical, not structural)};
+\node[fin]  (x02) at (15.6, -4.0)
+  {\textcolor{NeonAqua}{\textbf{Mod 07 — Attention}}\\[4pt]
+   Cocktail party · noise overload\\· self-awareness};
 
-\begin{aquabox}{Hypothesis for the Final — Cued Recall vs. Free Recall}
-In Module 04, every confabulation occurred when Gemini was asked to recall a specific fact without any retrieval cue. The brain's hippocampus benefits significantly from cued recall — a partial match to the original encoding context dramatically improves retrieval. If Gemini's context-window behavior has any analogue to this mechanism, then providing a cue such as ``recall the section of the Neon Accord that describes how fees split on public holidays'' should produce better accuracy than simply asking ``what does the Neon Accord say about fees?'' The final will test this directly.
-\end{aquabox}
+\draw[arr] (m02.east) -- (f02.west);
+\draw[arr] (f02.east) -- (x02.west);
+
+%% ── ROW 2: Mod 03 — y = -8.8 ────────────────────────
+\node[done] (m03) at (0,    -8.8)
+  {\textcolor{NeonAqua}{\textbf{Mod 03 — Perception}}\\[4pt]
+   Score: \textbf{0.94 / 1.0}};
+\node[mid]  (f03) at (7.8,  -8.8)
+  {Noise-tolerant recognition\\matches ventral-stream\\output (not mechanism)};
+\node[fin]  (x03) at (15.6, -8.8)
+  {\textcolor{NeonAqua}{\textbf{Mod 07 — Attention}}\\[4pt]
+   Selective attention ·\\inattentional blindness};
+
+\draw[arr] (m03.east) -- (f03.west);
+\draw[arr] (f03.east) -- (x03.west);
+
+%% ── ROW 3: Mod 04 — y = -13.6 ───────────────────────
+\node[done] (m04) at (0,    -13.6)
+  {\textcolor{CrimsonReceipt}{\textbf{Mod 04 — Memory}}\\[4pt]
+   Score: \textbf{0.0 / 1.0}};
+\node[mid]  (f04) at (7.8,  -13.6)
+  {No episodic trace →\\refusal + confabulation\\(70/30 semantic attractor)};
+\node[fin]  (x04) at (15.6, -13.6)
+  {\textcolor{CrimsonReceipt}{\textbf{Mod 06 — Emotion}}\\[4pt]
+   Emotional framing · tone\\manipulation test};
+
+\draw[arr] (m04.east) -- (f04.west);
+\draw[arr] (f04.east) -- (x04.west);
+
+%% ── CUED RECALL BRANCH — y = -18.4 ──────────────────
+\node[fin]  (cued) at (15.6, -18.4)
+  {\textcolor{CrimsonReceipt}{\textbf{Mod 04 — Redesign}}\\[4pt]
+   Cued vs.\ free recall\\Hypothesis: cued $\uparrow$ accuracy};
+
+\draw[darr] (m04.south) -- ++(0,-1.0) -| (cued.west)
+  node[pos=0.28, below, lbl] {pilot finding:\\70/30 recurs\\across sessions};
+
+%% ── SCORECARD — y = -22.2 ────────────────────────────
+\node[fin, text width=9.0cm, minimum height=1.8cm]
+  (card) at (7.8, -22.2)
+  {\textcolor{GlowingAsh}{\textbf{Brain vs.\ AI Scorecard — Final Deliverable}}\\[5pt]
+   5 modules · comparative verdict · brain-inspired redesign proposals};
+
+\draw[arr] (x02.south)  -- ++(0,-0.6) |- (card.east);
+\draw[arr] (x03.south)  -- ++(0,-0.8) |- (card.east);
+\draw[arr] (x04.south)  -- ++(0,-0.6) |- (card.east);
+\draw[arr] (cued.south) -- ++(0,-0.6) |- (card.east);
+
+\end{tikzpicture}}% end resizebox
+\end{center}
+\vspace{0.5em}
+
+{\small\textcolor{GlowingAsh}{%
+\textbf{Legend:} \textcolor{BurningSaffron}{\rule{0.55em}{0.55em}}~Midterm completed \quad
+\textcolor{NeonAqua}{\rule{0.55em}{0.55em}}~Finding \quad
+\textcolor{CrimsonReceipt}{\rule{0.55em}{0.55em}}~Final expansion \quad
+Dashed arrow = hypothesis driven by pilot data.}}
 
 \newpage
 
