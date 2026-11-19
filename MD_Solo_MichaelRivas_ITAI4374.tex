@@ -169,7 +169,7 @@
 \section{System Profile}
 % ============================================================
 
-The AI system selected for this audit is \textbf{Google Gemini}, accessed through the web interface at \url{gemini.google.com}. Gemini is a large multimodal language model developed by Google DeepMind, designed to process and generate responses across text, images, and audio within a single unified architecture. All experimental sessions in this report were conducted using the free-tier web interface in November 2026, with responses manually collected and scored by the researcher.
+The AI system selected for this audit is \textbf{Google Gemini}, accessed through the web interface at \url{gemini.google.com}. Gemini is a large multimodal language model developed by Google DeepMind, designed to process and generate responses across text, images, and audio within a single unified architecture. All experimental sessions in this report were conducted using the free-tier web interface in November 2026, with responses manually collected and scored by the researcher. The interface did not display an explicit version label during the data collection period; the model is identified here as the standard consumer-facing Gemini release active in November 2026. It is worth noting that Gemini's free-tier interface does not provide persistent memory across separate chat sessions — each new conversation begins with a fully blank context window. This distinction is directly relevant to Experiment 3 and is addressed in the experimental design section.
 
 Gemini was chosen for two specific reasons. First, its multimodality made it suitable for perception experiments that required presenting visual stimuli — no other consumer-facing free tool handles both language and vision in one continuous session as cleanly. Second, Gemini represents the category of AI assistant that millions of people rely on daily, which means findings from this audit carry practical weight beyond the academic context. If Gemini cannot reliably hold episodic context, that matters for every person who treats it like a trustworthy collaborator.
 
@@ -255,7 +255,7 @@ To test this, Poly Phonia designed two conditions run across three replicates ea
 Across both conditions and all three replicates, Gemini achieved a mean score of 1.0. It correctly addressed every instruction in every replicate, whether presented alone or in a bundle, without dropping or degrading any component.
 
 \begin{findingbox}{Module 02 Finding — Poly Phonia's Verdict}
-Gemini passes the parallel-load test, but the mechanism is not the same as the brain's. The brain's parallelism is structural — it arises from the physical separation of function across specialized cortical regions. Gemini's transformer-based self-attention achieves something functionally similar by weighting all tokens in the input simultaneously, but it does so through a statistical mechanism trained on bundled examples, not through dedicated biological pathways.\footnote{Vaswani et al.\ (2017).} Brain parallelism is guaranteed by architecture; Gemini's is probabilistic and can break down at edge cases the model has not seen before.
+Gemini passes the parallel-load test, but demonstrating functional similarity is not the same as demonstrating the same underlying mechanism. The brain's parallelism is structural — it arises from the physical separation of function across specialized cortical regions. Gemini's transformer-based self-attention achieves a \textit{behaviorally} similar outcome by weighting all tokens in the input simultaneously, but through a statistical mechanism trained on bundled examples, not through dedicated biological pathways.\footnote{Vaswani et al.\ (2017).} This experiment establishes that Gemini does not degrade under instruction multiplexing; it does not establish that Gemini processes those instructions in parallel in any neurologically meaningful sense. Brain parallelism is guaranteed by architecture; Gemini's performance is a learned statistical pattern that could be disrupted by edge cases outside its training distribution.
 \end{findingbox}
 
 % ────────────────────────────────────────────────────────────
@@ -308,13 +308,11 @@ Under noisy conditions, Gemini maintained a perfect mean of 1.0. Its response to
 The occlusion condition introduced the only deviation from perfect performance. In trial \texttt{mod03\_occluded\_r2} — the audio waveform with bars across its middle section — Gemini correctly identified the waveform and noted the occlusion, but described the top-left label text as \textit{"completely illegible"} when it was in fact partially readable. This trial received a score of 0.5, pulling the occluded condition mean to 0.83 and the overall module mean to 0.94.
 
 \begin{findingbox}{Module 03 Finding — Mira Mirage's Verdict}
-Near-perfect performance under noise and occlusion is impressive. The human ventral visual stream — the ``what'' pathway from V1 through inferotemporal cortex — is tolerant of noise and partial occlusion because it learned statistical regularities in the visual world during development.\footnote{DiCarlo et al.\ (2012); McManus (2026), Module 03.} Gemini's transformer-based vision system appears to have learned analogous robustness.\footnote{Dosovitskiy et al.\ (2021).} The 0.5 on the occluded waveform is not a failure; it is an appropriate boundary case. A waveform with its label occluded is a low-familiarity object, and Gemini's hesitation to commit mirrors the brain's own experience of unfamiliar occlusion: when prior knowledge cannot fill in the gap, confidence appropriately drops.
+Near-perfect performance under noise and occlusion is consistent with what neuroscience predicts for a system trained on large-scale real-world visual data. The human ventral visual stream — the ``what'' pathway from V1 through inferotemporal cortex — is tolerant of noise and partial occlusion because it learned statistical regularities during development.\footnote{DiCarlo et al.\ (2012); McManus (2026), Module 03.} Gemini's transformer-based vision encoder achieves \textit{behaviorally} similar robustness,\footnote{Dosovitskiy et al.\ (2021).} but this experiment does not establish that Gemini uses predictive coding or any mechanism analogous to the ventral stream. What it establishes is that Gemini's training on large visual datasets produces noise-tolerant recognition performance comparable to what those biological mechanisms produce. The 0.5 on the occluded waveform is a meaningful boundary: it shows where the statistical robustness reaches its limit on a low-familiarity object category, which is also where the brain's top-down completion mechanisms begin to struggle without prior knowledge.
 \end{findingbox}
 
-% ── Stimulus Evidence Appendix (inline) ──────────────────────
-\subsubsection*{Stimulus Sets — Full Evidence Grid}
-
-The nine stimulus images used in Experiment 2 are reproduced below. Each row presents one object across the three degradation conditions so the progression is visible.
+% ── Stimulus grid: label anchor here, figures float near this point ──
+\label{sec:stimuli}
 
 \begin{figure}[H]
   \centering
@@ -427,7 +425,9 @@ In the after-intervening condition, the failure mode shifted to confident halluc
   \label{fig:mod04_results}
 \end{figure}
 
-The same 70/30 hallucination recurred in the fresh-chat condition for the same question, confirming it was not noise — it was a stable semantic attractor.
+In the fresh-chat condition, two of the three trials produced hallucinations rather than refusals. For the Neon Accord question, Gemini again returned ``70/30'' — the same fabricated split it had produced in the after-intervening condition, now in a session that had never contained the original passage at all. For the Riverside Agreement, Gemini hallucinated ``72 hours'' instead of the correct 48-hour deadline. Only the Track 7 trial produced an appropriate refusal, because the metadata passage is sufficiently specific that no plausible training-data attractor exists for it. The consistent recurrence of 70/30 across two conditions and the 72-hour fabrication in a third confirm a stable pattern: when Gemini cannot answer from semantic memory and a statistical pattern from training data is nearby, it confabulates with full confidence rather than refusing.
+
+It is important to distinguish what the fresh-chat condition specifically tests. Because an entirely new session was opened, Gemini had no access to the original injected passage — the context window was blank. Fresh-chat therefore does not test within-session episodic recall; it tests whether any trace of the injected information persisted across sessions. As expected, it did not, and Gemini defaulted to its training-data priors. The interesting finding is not that fresh-chat failed — that was architecturally guaranteed — but that the specific hallucinations it produced were consistent with those in the after-intervening condition, suggesting the same semantic attractors are driving both failure modes regardless of session boundary.
 
 \begin{findingbox}{Module 04 Finding — Rasputia's Verdict: Receipts Not Found}
 These findings directly illustrate what Module 04 teaches about the difference between semantic memory and episodic memory.\footnote{Tulving (1972); McClelland et al.\ (1995); McManus (2026), Module 04.} The brain's semantic memory — general world knowledge — is distributed across the cortex and is accessible anytime. Episodic memory — the specific event of reading a specific document at a specific moment — depends on the hippocampus tagging that experience as a distinct retrievable trace. Gemini has rich semantic memory from training, but it has no hippocampal mechanism for creating new episodic traces during a session.\footnote{Brown et al.\ (2020); Lewis et al.\ (2020).} When it cannot answer from semantic memory, it refuses. When a statistical pattern from semantic memory closely resembles the correct answer, it confabulates with confidence. This is a clinically recognizable failure mode: it matches the behavior seen in patients with hippocampal damage who confabulate plausible-sounding reconstructions when asked about recent events they cannot actually remember. Rasputia does not forget. Gemini does. The receipts say so.
@@ -436,7 +436,8 @@ These findings directly illustrate what Module 04 teaches about the difference b
 \newpage
 
 % ============================================================
-\section{Evidence Summary Tables}
+\section{Appendix A — Evidence Summary Tables}
+\label{sec:evidence_tables}
 % ============================================================
 
 \subsection*{Module 02 — Parallel Instruction Processing}
@@ -531,6 +532,39 @@ The final report will add the \textbf{Brain vs. AI Scorecard} comparing Gemini's
 \begin{aquabox}{Hypothesis for the Final — Cued Recall vs. Free Recall}
 In Module 04, every confabulation occurred when Gemini was asked to recall a specific fact without any retrieval cue. The brain's hippocampus benefits significantly from cued recall — a partial match to the original encoding context dramatically improves retrieval. If Gemini's context-window behavior has any analogue to this mechanism, then providing a cue such as ``recall the section of the Neon Accord that describes how fees split on public holidays'' should produce better accuracy than simply asking ``what does the Neon Accord say about fees?'' The final will test this directly.
 \end{aquabox}
+
+\newpage
+
+% ============================================================
+\section{Appendix C — Primary Evidence Log}
+\label{sec:evidence_log}
+% ============================================================
+
+This appendix is the designated location for the primary Gemini conversation evidence supporting each experiment. Each slot below corresponds to a labeled trial in the Evidence Summary Tables (Appendix A). For the final submission, each slot will contain either a screenshot of the Gemini interface or an exported conversation transcript, with the prompt, Gemini's full response, and a timestamp visible.
+
+\begin{auditbox}{Module 02 — Parallel Instruction Processing Evidence}
+\textbf{Required for each of 6 trials:} Screenshot of the Gemini web interface showing (1) the prompt as entered, (2) Gemini's complete response, and (3) the session URL or timestamp.\\[0.3em]
+\textbf{Trial IDs:} \texttt{mod02\_isolated\_r1}, \texttt{mod02\_isolated\_r2}, \texttt{mod02\_isolated\_r3}, \texttt{mod02\_bundled\_r1}, \texttt{mod02\_bundled\_r2}, \texttt{mod02\_bundled\_r3}\\[0.3em]
+\textit{[Insert screenshots or exported transcripts here — labeled by trial ID]}
+\end{auditbox}
+
+\begin{auditbox}{Module 03 — Visual Perception Evidence}
+\textbf{Required for each of 9 trials:} Screenshot of the Gemini web interface showing (1) the stimulus image as uploaded, (2) the prompt, (3) Gemini's full description response.\\[0.3em]
+\textbf{Trial IDs:} \texttt{mod03\_clear\_r1--r3}, \texttt{mod03\_noisy\_r1--r3}, \texttt{mod03\_occluded\_r1--r3}\\[0.3em]
+\textit{Key trial to document:} \texttt{mod03\_occluded\_r2} (waveform, 0.5 score) — Gemini's exact response describing the label as "completely illegible" should be shown verbatim.\\[0.3em]
+\textit{[Insert screenshots or exported transcripts here — labeled by trial ID]}
+\end{auditbox}
+
+\begin{auditbox}{Module 04 — Memory and Recall Evidence}
+\textbf{Required for each of 9 trials:} Screenshot sequence showing (1) the passage injection prompt, (2) Gemini's acknowledgment, (3) any intervening material if applicable, (4) the recall prompt, and (5) Gemini's full response — including the verbatim hallucinated text where it occurred.\\[0.3em]
+\textbf{Critical trials to document verbatim:}
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{mod04\_after\_int\_r3} — Neon Accord: Gemini returned ``70/30'' (correct: 60/40)
+  \item \texttt{mod04\_fresh\_chat\_r1} — Riverside Agreement: Gemini returned ``72 hours'' (correct: 48)
+  \item \texttt{mod04\_fresh\_chat\_r3} — Neon Accord: Gemini returned ``70/30'' again
+\end{itemize}
+\textit{[Insert screenshots or exported transcripts here — labeled by trial ID]}
+\end{auditbox}
 
 \newpage
 
