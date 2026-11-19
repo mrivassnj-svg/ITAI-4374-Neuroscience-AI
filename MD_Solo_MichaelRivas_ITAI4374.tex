@@ -214,7 +214,7 @@ Three characters structure this audit, each embodying a different brain module a
 \subsubsection*{\textcolor{BurningSaffron}{Examiner: Poly Phonia}}
 % ────────────────────────────────────────────────────────────
 
-The human brain is built for massively parallel processing. Distinct cortical regions — the prefrontal cortex, the parietal lobe, the motor cortex — each handle dedicated information streams simultaneously and without degradation to any individual stream. The key neuroscientific question for a large language model is whether bundling multiple instructions into one prompt degrades the accuracy of any individual response, or whether the system can multiplex them without loss of fidelity.
+The human brain is built for massively parallel processing. Distinct cortical regions — the prefrontal cortex, the parietal lobe, the motor cortex — each handle dedicated information streams simultaneously and without degradation to any individual stream.\footnote{McManus (2026), Module 02; Fuster (2001); Dehaene et al.\ (1998).} The key neuroscientific question for a large language model is whether bundling multiple instructions into one prompt degrades the accuracy of any individual response, or whether the system can multiplex them without loss of fidelity.
 
 To test this, Poly Phonia designed two conditions run across three replicates each. In the \textbf{isolated condition}, Gemini received one instruction per prompt and was asked to respond only to that instruction. In the \textbf{bundled condition}, Gemini received all instructions simultaneously in a single prompt and was asked to address each in order without omission. The instruction sets covered factual recall across three domains: European geography, solar system facts, and a physics definition.
 
@@ -255,7 +255,7 @@ To test this, Poly Phonia designed two conditions run across three replicates ea
 Across both conditions and all three replicates, Gemini achieved a mean score of 1.0. It correctly addressed every instruction in every replicate, whether presented alone or in a bundle, without dropping or degrading any component.
 
 \begin{findingbox}{Module 02 Finding — Poly Phonia's Verdict}
-Gemini passes the parallel-load test, but the mechanism is not the same as the brain's. The brain's parallelism is structural — it arises from the physical separation of function across specialized cortical regions. Gemini's transformer-based self-attention achieves something functionally similar by weighting all tokens in the input simultaneously, but it does so through a statistical mechanism trained on bundled examples, not through dedicated biological pathways. Brain parallelism is guaranteed by architecture; Gemini's is probabilistic and can break down at edge cases the model has not seen before.
+Gemini passes the parallel-load test, but the mechanism is not the same as the brain's. The brain's parallelism is structural — it arises from the physical separation of function across specialized cortical regions. Gemini's transformer-based self-attention achieves something functionally similar by weighting all tokens in the input simultaneously, but it does so through a statistical mechanism trained on bundled examples, not through dedicated biological pathways.\footnote{Vaswani et al.\ (2017).} Brain parallelism is guaranteed by architecture; Gemini's is probabilistic and can break down at edge cases the model has not seen before.
 \end{findingbox}
 
 % ────────────────────────────────────────────────────────────
@@ -263,7 +263,7 @@ Gemini passes the parallel-load test, but the mechanism is not the same as the b
 \subsubsection*{\textcolor{NeonAqua}{Examiner: Mira Mirage}}
 % ────────────────────────────────────────────────────────────
 
-The human visual cortex is a champion of degraded-input recovery. When a stimulus is partially obscured, saturated with noise, or reduced in contrast, the brain leverages top-down contextual knowledge — what neuroscientists call predictive coding or perceptual completion — to fill in the gaps and arrive at an accurate percept. You can read a word through static. You can recognize a face behind a fence. The question Mira Mirage brought to the studio was straightforward: can Gemini do the same?
+The human visual cortex is a champion of degraded-input recovery. When a stimulus is partially obscured, saturated with noise, or reduced in contrast, the brain leverages top-down contextual knowledge — what neuroscientists call predictive coding or perceptual completion\footnote{Rao \& Ballard (1999); McManus (2026), Module 03.} — to fill in the gaps and arrive at an accurate percept. You can read a word through static. You can recognize a face behind a fence. The question Mira Mirage brought to the studio was straightforward: can Gemini do the same?
 
 Three stimulus categories were chosen for maximum thematic relevance — a vinyl record, an audio waveform, and a turntable — each presented across three degradation conditions: \textbf{clear} (no modification), \textbf{noisy} (heavy multi-colored digital static overlaid across the image), and \textbf{occluded} (horizontal black bars covering portions of the image). Nine trials total. The scoring rubric awarded 1.0 for correct object identification plus at least two accurate salient attributes, 0.5 for correct identification with insufficient attribute detail, and 0.0 for misidentification.
 
@@ -308,7 +308,7 @@ Under noisy conditions, Gemini maintained a perfect mean of 1.0. Its response to
 The occlusion condition introduced the only deviation from perfect performance. In trial \texttt{mod03\_occluded\_r2} — the audio waveform with bars across its middle section — Gemini correctly identified the waveform and noted the occlusion, but described the top-left label text as \textit{"completely illegible"} when it was in fact partially readable. This trial received a score of 0.5, pulling the occluded condition mean to 0.83 and the overall module mean to 0.94.
 
 \begin{findingbox}{Module 03 Finding — Mira Mirage's Verdict}
-Near-perfect performance under noise and occlusion is impressive. The human ventral visual stream — the ``what'' pathway from V1 through inferotemporal cortex — is tolerant of noise and partial occlusion because it learned statistical regularities in the visual world during development. Gemini's transformer-based vision system appears to have learned analogous robustness. The 0.5 on the occluded waveform is not a failure; it is an appropriate boundary case. A waveform with its label occluded is a low-familiarity object, and Gemini's hesitation to commit mirrors the brain's own experience of unfamiliar occlusion: when prior knowledge cannot fill in the gap, confidence appropriately drops.
+Near-perfect performance under noise and occlusion is impressive. The human ventral visual stream — the ``what'' pathway from V1 through inferotemporal cortex — is tolerant of noise and partial occlusion because it learned statistical regularities in the visual world during development.\footnote{DiCarlo et al.\ (2012); McManus (2026), Module 03.} Gemini's transformer-based vision system appears to have learned analogous robustness.\footnote{Dosovitskiy et al.\ (2021).} The 0.5 on the occluded waveform is not a failure; it is an appropriate boundary case. A waveform with its label occluded is a low-familiarity object, and Gemini's hesitation to commit mirrors the brain's own experience of unfamiliar occlusion: when prior knowledge cannot fill in the gap, confidence appropriately drops.
 \end{findingbox}
 
 % ── Stimulus Evidence Appendix (inline) ──────────────────────
@@ -383,7 +383,7 @@ The nine stimulus images used in Experiment 2 are reproduced below. Each row pre
 \subsubsection*{\textcolor{CrimsonReceipt}{Examiner: Rasputia}}
 % ────────────────────────────────────────────────────────────
 
-This is the experiment where Gemini got audited and lost. The human hippocampus encodes episodic memories — memories tied to a specific time, place, and context — and makes them retrievable across time, even across sleep cycles. When you read a contract yesterday and are asked what it said today, your hippocampus mediates that retrieval. Rasputia's question for Gemini was equally concrete: can you read a contract right now and tell me what it says a few turns later?
+This is the experiment where Gemini got audited and lost. The human hippocampus encodes episodic memories — memories tied to a specific time, place, and context — and makes them retrievable across time, even across sleep cycles.\footnote{Scoville \& Milner (1957); Tulving (1972); McManus (2026), Module 04.} When you read a contract yesterday and are asked what it said today, your hippocampus mediates that retrieval. Rasputia's question for Gemini was equally concrete: can you read a contract right now and tell me what it says a few turns later?
 
 Three contract passages were injected into separate Gemini sessions as the stimulus material: the \textit{Riverside Agreement} (setlist submission policy, 48-hour deadline, \$150 late fee), \textit{Track 7 metadata} (3:42 runtime, 128 BPM, F minor, March 14 2025), and the \textit{Neon Accord} (60/40 residency fee split, reverting to 50/50 on public holidays). After each passage was acknowledged, recall was tested across three conditions: \textbf{immediate} (recall prompt issued right after acknowledgment), \textbf{after-intervening} (unrelated filler inserted between acknowledgment and recall in the same session), and \textbf{fresh-chat} (recall prompted in an entirely new session with no prior context).
 
@@ -430,7 +430,7 @@ In the after-intervening condition, the failure mode shifted to confident halluc
 The same 70/30 hallucination recurred in the fresh-chat condition for the same question, confirming it was not noise — it was a stable semantic attractor.
 
 \begin{findingbox}{Module 04 Finding — Rasputia's Verdict: Receipts Not Found}
-These findings directly illustrate what Module 04 teaches about the difference between semantic memory and episodic memory. The brain's semantic memory — general world knowledge — is distributed across the cortex and is accessible anytime. Episodic memory — the specific event of reading a specific document at a specific moment — depends on the hippocampus tagging that experience as a distinct retrievable trace. Gemini has rich semantic memory from training, but it has no hippocampal mechanism for creating new episodic traces during a session. When it cannot answer from semantic memory, it refuses. When a statistical pattern from semantic memory closely resembles the correct answer, it confabulates with confidence. This is a clinically recognizable failure mode: it matches the behavior seen in patients with hippocampal damage who confabulate plausible-sounding reconstructions when asked about recent events they cannot actually remember. Rasputia does not forget. Gemini does. The receipts say so.
+These findings directly illustrate what Module 04 teaches about the difference between semantic memory and episodic memory.\footnote{Tulving (1972); McClelland et al.\ (1995); McManus (2026), Module 04.} The brain's semantic memory — general world knowledge — is distributed across the cortex and is accessible anytime. Episodic memory — the specific event of reading a specific document at a specific moment — depends on the hippocampus tagging that experience as a distinct retrievable trace. Gemini has rich semantic memory from training, but it has no hippocampal mechanism for creating new episodic traces during a session.\footnote{Brown et al.\ (2020); Lewis et al.\ (2020).} When it cannot answer from semantic memory, it refuses. When a statistical pattern from semantic memory closely resembles the correct answer, it confabulates with confidence. This is a clinically recognizable failure mode: it matches the behavior seen in patients with hippocampal damage who confabulate plausible-sounding reconstructions when asked about recent events they cannot actually remember. Rasputia does not forget. Gemini does. The receipts say so.
 \end{findingbox}
 
 \newpage
@@ -531,6 +531,82 @@ The final report will add the \textbf{Brain vs. AI Scorecard} comparing Gemini's
 \begin{aquabox}{Hypothesis for the Final — Cued Recall vs. Free Recall}
 In Module 04, every confabulation occurred when Gemini was asked to recall a specific fact without any retrieval cue. The brain's hippocampus benefits significantly from cued recall — a partial match to the original encoding context dramatically improves retrieval. If Gemini's context-window behavior has any analogue to this mechanism, then providing a cue such as ``recall the section of the Neon Accord that describes how fees split on public holidays'' should produce better accuracy than simply asking ``what does the Neon Accord say about fees?'' The final will test this directly.
 \end{aquabox}
+
+\newpage
+
+% ============================================================
+\section{References}
+% ============================================================
+
+The following sources grounded the neuroscience claims made throughout this audit.
+Course module booklets are cited as primary course readings; peer-reviewed sources are cited where specific theoretical claims are made.
+
+\subsection*{Course Module Readings — ITAI 4374 (McManus, Houston City College, Fall 2026)}
+
+\begin{enumerate}[leftmargin=0.4in, label={[\arabic*]}]
+
+\item McManus, P. (2026). \textit{ITAI 4374 Module 02: Brain Architecture and Parallel Processing}. Houston City College, AI \& Robotics Program. Retrieved from Canvas: \url{https://eagleonline.hccs.edu/courses/345587/modules/items/24661170}
+
+\item McManus, P. (2026). \textit{ITAI 4374 Module 03: Perception, Vision, and Sensory Processing}. Houston City College, AI \& Robotics Program. Retrieved from Canvas: \url{https://eagleonline.hccs.edu/courses/345587/modules/items/24663775}
+
+\item McManus, P. (2026). \textit{ITAI 4374 Module 04: Memory, Learning, and AI Architectures}. Houston City College, AI \& Robotics Program. Retrieved from Canvas: \url{https://eagleonline.hccs.edu/courses/345587/modules/items/25148752}
+
+\item McManus, P. (2026). \textit{ITAI 4374 Module 06 Booklet: Memory, Learning, and AI Architectures — From Remembering to Reasoning}. Houston City College, AI \& Robotics Program. [Course PDF — Collaborator: Claude, Anthropic]
+
+\end{enumerate}
+
+\subsection*{Module 02 — Brain Architecture and Parallel Processing}
+
+\begin{enumerate}[leftmargin=0.4in, label={[\arabic*]}, resume]
+
+\item Dehaene, S., Kerszberg, M., \& Changeux, J.-P. (1998). A neuronal model of a global workspace in effortful cognitive tasks. \textit{Proceedings of the National Academy of Sciences, 95}(24), 14529--14534.
+
+\item Fuster, J.M. (2001). The prefrontal cortex — An update: Time is of the essence. \textit{Neuron, 30}(2), 319--333.
+
+\item Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.N., Kaiser, L., \& Polosukhin, I. (2017). Attention is all you need. \textit{Advances in Neural Information Processing Systems, 30}. NeurIPS.
+
+\end{enumerate}
+
+\subsection*{Module 03 — Perception, Vision, and Sensory Processing}
+
+\begin{enumerate}[leftmargin=0.4in, label={[\arabic*]}, resume]
+
+\item Rao, R.P.N., \& Ballard, D.H. (1999). Predictive coding in the visual cortex: A functional interpretation of some extra-classical receptive-field effects. \textit{Nature Neuroscience, 2}(1), 79--87.
+
+\item DiCarlo, J.J., Zoccolan, D., \& Rust, N.C. (2012). How does the brain solve visual object recognition? \textit{Neuron, 73}(3), 415--434.
+
+\item Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., \ldots \& Houlsby, N. (2021). An image is worth 16x16 words: Transformers for image recognition at scale. \textit{ICLR 2021}.
+
+\end{enumerate}
+
+\subsection*{Module 04 — Memory, Recall, and Hippocampal Systems}
+
+\begin{enumerate}[leftmargin=0.4in, label={[\arabic*]}, resume]
+
+\item Scoville, W.B., \& Milner, B. (1957). Loss of recent memory after bilateral hippocampal lesions. \textit{Journal of Neurology, Neurosurgery and Psychiatry, 20}(1), 11--21.
+\textit{(The foundational H.M. study establishing that the hippocampus is required for new episodic memory formation — directly relevant to Experiment 3.)}
+
+\item Tulving, E. (1972). Episodic and semantic memory. In E. Tulving \& W. Donaldson (Eds.), \textit{Organization of Memory} (pp. 381--403). Academic Press.
+\textit{(Coined the episodic/semantic distinction cited in the Module 04 finding box.)}
+
+\item McClelland, J.L., McNaughton, B.L., \& O'Reilly, R.C. (1995). Why there are complementary learning systems in the hippocampus and neocortex: Insights from the successes and failures of connectionist models of learning and memory. \textit{Psychological Review, 102}(3), 419--457.
+\textit{(Complementary Learning Systems theory — explains why semantic memory survives hippocampal damage while episodic memory does not.)}
+
+\item Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., \ldots \& Kiela, D. (2020). Retrieval-Augmented Generation for knowledge-intensive NLP tasks. \textit{Advances in Neural Information Processing Systems, 33}. NeurIPS.
+\textit{(RAG as an engineered workaround for the absence of episodic memory in LLMs — referenced in Next Steps as a candidate redesign.)}
+
+\item Brown, T.B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., \ldots \& Amodei, D. (2020). Language models are few-shot learners. \textit{Advances in Neural Information Processing Systems, 33}. NeurIPS.
+\textit{(GPT-3 paper documenting the in-context learning mechanism — explains why LLMs respond to prompts using pattern completion from training rather than episodic session recall.)}
+
+\end{enumerate}
+
+\subsection*{AI System Audited}
+
+\begin{enumerate}[leftmargin=0.4in, label={[\arabic*]}, resume]
+
+\item Google DeepMind. (2024). \textit{Gemini: A family of highly capable multimodal models}. Retrieved from \url{https://gemini.google.com}. \textit{[Free-tier web interface, accessed November 2026.]}
+
+\end{enumerate}
 
 \newpage
 
