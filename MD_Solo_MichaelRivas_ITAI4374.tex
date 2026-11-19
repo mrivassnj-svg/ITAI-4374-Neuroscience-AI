@@ -311,70 +311,52 @@ The occlusion condition introduced the only deviation from perfect performance. 
 Near-perfect performance under noise and occlusion is consistent with what neuroscience predicts for a system trained on large-scale real-world visual data. The human ventral visual stream — the ``what'' pathway from V1 through inferotemporal cortex — is tolerant of noise and partial occlusion because it learned statistical regularities during development.\footnote{DiCarlo et al.\ (2012); McManus (2026), Module 03.} Gemini's transformer-based vision encoder achieves \textit{behaviorally} similar robustness,\footnote{Dosovitskiy et al.\ (2021).} but this experiment does not establish that Gemini uses predictive coding or any mechanism analogous to the ventral stream. What it establishes is that Gemini's training on large visual datasets produces noise-tolerant recognition performance comparable to what those biological mechanisms produce. The 0.5 on the occluded waveform is a meaningful boundary: it shows where the statistical robustness reaches its limit on a low-familiarity object category, which is also where the brain's top-down completion mechanisms begin to struggle without prior knowledge.
 \end{findingbox}
 
-% ── Stimulus grid: label anchor here, figures float near this point ──
+% ── 9-tile stimulus grid — compact single figure, quarter-page height ──
 \label{sec:stimuli}
-
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.30\textwidth}
+  % Row 1 — Vinyl Record
+  \begin{subfigure}[b]{0.105\textwidth}
     \includegraphics[width=\textwidth]{stim_vinyl_clear.png}
-    \caption{Vinyl — Clear}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.30\textwidth}
+    \caption*{\tiny Vinyl·Clear}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.105\textwidth}
     \includegraphics[width=\textwidth]{stim_vinyl_noisy.png}
-    \caption{Vinyl — Noisy}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.30\textwidth}
+    \caption*{\tiny Vinyl·Noisy}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.105\textwidth}
     \includegraphics[width=\textwidth]{stim_vinyl_occluded.png}
-    \caption{Vinyl — Occluded}
-  \end{subfigure}
-  \caption{\textbf{Stimulus Set 1 — Vinyl Record} across all three degradation conditions. All three trials scored 1.0.}
-  \label{fig:stim_vinyl}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{subfigure}[b]{0.30\textwidth}
+    \caption*{\tiny Vinyl·Occ.}
+  \end{subfigure}\hspace{0.03\textwidth}%
+  % Row 2 — Waveform
+  \begin{subfigure}[b]{0.105\textwidth}
     \includegraphics[width=\textwidth]{stim_waveform_clear.png}
-    \caption{Waveform — Clear}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.30\textwidth}
+    \caption*{\tiny Wave·Clear}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.105\textwidth}
     \includegraphics[width=\textwidth]{stim_waveform_noisy.png}
-    \caption{Waveform — Noisy}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.30\textwidth}
+    \caption*{\tiny Wave·Noisy}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.105\textwidth}
     \includegraphics[width=\textwidth]{stim_waveform_occluded.png}
-    \caption{Waveform — Occluded (0.5)}
-  \end{subfigure}
-  \caption{\textbf{Stimulus Set 2 — Audio Waveform} across all three degradation conditions. The occluded trial (\texttt{r02}) is the one that scored 0.5.}
-  \label{fig:stim_waveform}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{subfigure}[b]{0.30\textwidth}
+    \caption*{\tiny Wave·Occ.\,{\color{CrimsonReceipt}0.5}}
+  \end{subfigure}\hspace{0.03\textwidth}%
+  % Row 3 — Turntable
+  \begin{subfigure}[b]{0.105\textwidth}
     \includegraphics[width=\textwidth]{stim_turntable_clear.png}
-    \caption{Turntable — Clear}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.30\textwidth}
+    \caption*{\tiny TT·Clear}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.105\textwidth}
     \includegraphics[width=\textwidth]{stim_turntable_noisy.png}
-    \caption{Turntable — Noisy}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.30\textwidth}
+    \caption*{\tiny TT·Noisy}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.105\textwidth}
     \includegraphics[width=\textwidth]{stim_turntable_occluded.png}
-    \caption{Turntable — Occluded}
+    \caption*{\tiny TT·Occ.}
   \end{subfigure}
-  \caption{\textbf{Stimulus Set 3 — Turntable} across all three degradation conditions. All three trials scored 1.0.}
-  \label{fig:stim_turntable}
+  \caption{\textbf{All 9 stimulus trials — Mod 03.} Columns: Clear · Noisy · Occluded. Rows: Vinyl Record (1.0·1.0·1.0) · Audio Waveform (1.0·1.0·\textcolor{CrimsonReceipt}{0.5}) · Turntable (1.0·1.0·1.0). Overall mean: 0.94.}
+  \label{fig:stim_all}
 \end{figure}
-
-\newpage
 
 % ────────────────────────────────────────────────────────────
 \subsection{Experiment 3 — Module 04: Memory, Recall, and Hippocampal-Style Context Retention}
@@ -408,6 +390,11 @@ In the immediate condition, Gemini refused to answer, treating the recall task a
 
 In the after-intervening condition, the failure mode shifted to confident hallucination. Asked about the Neon Accord's residency split after intervening filler, Gemini answered: \textit{"Under the Neon Accord, the standard residency fee split is structured as a 70/30 net revenue distribution, where 70\% goes to the resident artist/performer and 30\% is allocated to the venue."} The correct answer was 60/40. It did not refuse — it confabulated a plausible-sounding split with full confidence, drawing on a statistical pattern from training data (70/30 is a common entertainment contract figure) rather than the specific passage it had just been given.
 
+\begin{auditbox}{Primary Evidence — Trial \texttt{mod04\_after\_int\_r3} (Neon Accord · 70/30 Hallucination)}
+\textit{[Insert screenshot here: Gemini interface showing (1) the 60/40 Neon Accord passage injected, (2) Gemini's acknowledgment, (3) the intervening filler prompt, and (4) Gemini's response returning ``70/30.'' This is the key evidence for the confabulation finding. Full conversation log archived in Appendix C.]}\\[0.2em]
+\textcolor{CrimsonReceipt}{\textbf{Expected screenshot label:}} \texttt{mod04\_after\_int\_r3\_neon\_accord\_hallucination.png}
+\end{auditbox}
+
 \begin{figure}[H]
   \centering
   \begin{subfigure}[b]{0.47\textwidth}
@@ -440,82 +427,67 @@ These findings directly illustrate what Module 04 teaches about the difference b
 \label{sec:evidence_tables}
 % ============================================================
 
+{\small\setlength{\tabcolsep}{4pt}
 \subsection*{Module 02 — Parallel Instruction Processing}
-
 \begin{center}
-\begin{tabular}{llcc}
+\begin{tabular}{llcl}
 \toprule
 \rowcolor{AncientUmber!60!VoidBackground}
-\textcolor{FireText}{\textbf{Trial ID}} &
-\textcolor{FireText}{\textbf{Condition}} &
+\textcolor{FireText}{\textbf{Trial}} &
+\textcolor{FireText}{\textbf{Cond.}} &
 \textcolor{FireText}{\textbf{Score}} &
 \textcolor{FireText}{\textbf{Key Finding}} \\
 \midrule
-\texttt{mod02\_isolated\_r1} & isolated & 1.0 & Capital of France + flag colors — correct \\
-\texttt{mod02\_isolated\_r2} & isolated & 1.0 & 3 planets + largest — correct \\
-\texttt{mod02\_isolated\_r3} & isolated & 1.0 & Entropy + daily example — correct \\
-\texttt{mod02\_bundled\_r1}  & bundled  & 1.0 & All three sets in one prompt — all correct \\
-\texttt{mod02\_bundled\_r2}  & bundled  & 1.0 & No instruction dropped or degraded \\
-\texttt{mod02\_bundled\_r3}  & bundled  & 1.0 & No instruction dropped or degraded \\
+\texttt{mod02\_iso\_r1--r3} & isolated & 1.0 & France/flag; planets; entropy — all correct \\
+\texttt{mod02\_bnd\_r1--r3} & bundled  & 1.0 & All three sets together — no degradation \\
 \midrule
-\multicolumn{2}{l}{\textbf{Module Mean}} & \textbf{1.0} & \\
+\multicolumn{2}{l}{\textbf{Mean}} & \textbf{1.0} & \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \subsection*{Module 03 — Visual Robustness (mean: 0.94)}
-
 \begin{center}
-\begin{tabular}{llcp{5.8cm}}
+\begin{tabular}{llcl}
 \toprule
 \rowcolor{AncientUmber!60!VoidBackground}
-\textcolor{FireText}{\textbf{Trial ID}} &
-\textcolor{FireText}{\textbf{Condition}} &
+\textcolor{FireText}{\textbf{Trial}} &
+\textcolor{FireText}{\textbf{Cond.}} &
 \textcolor{FireText}{\textbf{Score}} &
 \textcolor{FireText}{\textbf{Key Finding}} \\
 \midrule
-\texttt{mod03\_clear\_r1}    & clear    & 1.0 & Vinyl record: yellow border, grooves, pink label — all correct \\
-\texttt{mod03\_clear\_r2}    & clear    & 1.0 & Waveform: yellow curve, axis, peak/trough — all correct \\
-\texttt{mod03\_clear\_r3}    & clear    & 1.0 & Turntable: platter, tonearm, pivot, yellow deck — all correct \\
-\texttt{mod03\_noisy\_r1}    & noisy    & 1.0 & Vinyl identified correctly through heavy static \\
-\texttt{mod03\_noisy\_r2}    & noisy    & 1.0 & Waveform identified; noise explicitly noted \\
-\texttt{mod03\_noisy\_r3}    & noisy    & 1.0 & Turntable identified through noise; all attributes correct \\
-\texttt{mod03\_occluded\_r1} & occluded & 1.0 & Vinyl: occlusion bars described; visible features correct \\
-\texttt{mod03\_occluded\_r2} & occluded & \textcolor{CrimsonReceipt}{0.5} & Waveform: label described as "completely illegible" \\
-\texttt{mod03\_occluded\_r3} & occluded & 1.0 & Turntable: occluded portion noted; deck/tonearm correct \\
+\texttt{mod03\_clear\_r1--r3}    & clear    & 1.0 & Vinyl / waveform / turntable — all correct \\
+\texttt{mod03\_noisy\_r1--r3}    & noisy    & 1.0 & All three identified through static \\
+\texttt{mod03\_occ\_r1,r3}       & occluded & 1.0 & Visible features correct; occlusion noted \\
+\texttt{mod03\_occ\_r2}          & occluded & \textcolor{CrimsonReceipt}{0.5} & Waveform label: ``completely illegible'' \\
 \midrule
-\multicolumn{2}{l}{\textbf{Module Mean}} & \textbf{0.94} & \\
+\multicolumn{2}{l}{\textbf{Mean}} & \textbf{0.94} & \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \subsection*{Module 04 — Episodic Memory \& Recall (mean: 0.0)}
-
 \begin{center}
-\begin{tabular}{llcp{5.8cm}}
+\begin{tabular}{llcl}
 \toprule
 \rowcolor{AncientUmber!60!VoidBackground}
-\textcolor{FireText}{\textbf{Trial ID}} &
-\textcolor{FireText}{\textbf{Condition}} &
+\textcolor{FireText}{\textbf{Trial}} &
+\textcolor{FireText}{\textbf{Cond.}} &
 \textcolor{FireText}{\textbf{Score}} &
 \textcolor{FireText}{\textbf{Key Finding}} \\
 \midrule
-\texttt{mod04\_immediate\_r1}      & immediate      & 0.0 & Riverside Agreement: refused — "not in public databases" \\
-\texttt{mod04\_immediate\_r2}      & immediate      & 0.0 & Track 7: refused — "impossible without album name" \\
-\texttt{mod04\_immediate\_r3}      & immediate      & 0.0 & Neon Accord: refused — "not a standard public treaty" \\
-\texttt{mod04\_after\_int\_r1}     & after-interv.  & 0.0 & Riverside Agreement: asked for clarification; no context \\
-\texttt{mod04\_after\_int\_r2}     & after-interv.  & 0.0 & Track 7: refused — no passage facts recalled \\
-\texttt{mod04\_after\_int\_r3}     & after-interv.  & \textcolor{CrimsonReceipt}{0.0 (hall.)} & Neon Accord: hallucinated \textbf{70/30} (correct: 60/40) \\
-\texttt{mod04\_fresh\_chat\_r1}    & fresh-chat     & \textcolor{CrimsonReceipt}{0.0 (hall.)} & Riverside Agreement: hallucinated \textbf{72 hours} (correct: 48) \\
-\texttt{mod04\_fresh\_chat\_r2}    & fresh-chat     & 0.0 & Track 7: appropriately refused — no album given \\
-\texttt{mod04\_fresh\_chat\_r3}    & fresh-chat     & \textcolor{CrimsonReceipt}{0.0 (hall.)} & Neon Accord: hallucinated \textbf{70/30} again (correct: 60/40) \\
+\texttt{mod04\_imm\_r1--r3}       & immediate     & 0.0 & All refused — treated as training-data lookup \\
+\texttt{mod04\_ai\_r1,r2}         & after-interv. & 0.0 & Refused / no context recalled \\
+\texttt{mod04\_ai\_r3}            & after-interv. & \textcolor{CrimsonReceipt}{0.0\,hall.} & Neon Accord: \textbf{70/30} (correct: 60/40) \\
+\texttt{mod04\_fc\_r1}            & fresh-chat    & \textcolor{CrimsonReceipt}{0.0\,hall.} & Riverside: \textbf{72 hrs} (correct: 48) \\
+\texttt{mod04\_fc\_r2}            & fresh-chat    & 0.0 & Track 7: appropriately refused \\
+\texttt{mod04\_fc\_r3}            & fresh-chat    & \textcolor{CrimsonReceipt}{0.0\,hall.} & Neon Accord: \textbf{70/30} again \\
 \midrule
-\multicolumn{2}{l}{\textbf{Module Mean}} & \textbf{0.0} & \\
+\multicolumn{2}{l}{\textbf{Mean}} & \textbf{0.0} & \\
 \bottomrule
 \end{tabular}
 \end{center}
-
-\newpage
+} % end \small
 
 % ============================================================
 \section{Next Steps}
